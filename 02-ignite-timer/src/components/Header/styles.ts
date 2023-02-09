@@ -6,17 +6,17 @@ export const HeaderContainer = styled.header`
   justify-content: space-between; // totalmente direita e totalmente esquerda
 
   nav {
-    display: flex;
-    gap: 0.5rem;
+    display: flex; // padrão row
+    gap: 0.5rem; // espaçamento entre os itens
   }
 
   a {
     width: 3rem;
     height: 3rem;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; // padrão row
+    justify-content: center; // centr. no comprimento **row
+    align-items: center; // centralizado na altura **row
 
     color: ${(props) => props.theme['gray-100']};
 
