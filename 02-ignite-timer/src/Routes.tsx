@@ -3,7 +3,7 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { History } from './pages/History'
 import { Home } from './pages/Home'
-import { DefaultLayots } from './pages/layouts/DefaultLayots'
+import { DefaultLayots } from './pages/layouts/DefaultLayout/DefaultLayots'
 
 export const Router = () => {
   return (
