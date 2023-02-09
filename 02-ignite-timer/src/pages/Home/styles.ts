@@ -52,6 +52,10 @@ const BaseInput = styled.input`
 
 export const TaskInput = styled(BaseInput)`
   flex: 1; // um atalho para setar 3 propriedades(flex-grow[eu dou habilidade para o meu componente crescer além?], flex-basic[qual o tamanho ideal?],shrink[eu dou habilidade para o meu componente diminuir além?] )
+
+  &::-webkit-calendar-picker-indicator {  // tirar a seta do input no chorme
+    display: none !important;
+  }
 `
 export const MinutesAmountInput = styled(BaseInput)`
   width: 4rem;
