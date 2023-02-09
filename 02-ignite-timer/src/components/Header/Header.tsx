@@ -19,3 +19,7 @@ export const Header = () => {
     </HeaderContainer>
   )
 }
+
+// Nav Link to - realizando a renderização para as páginas
+// ele cria uma classe active e um aria-current='page'
+// podendo ser utilizado para realizar estilização
