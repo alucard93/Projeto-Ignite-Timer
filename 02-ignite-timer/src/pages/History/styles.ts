@@ -71,7 +71,7 @@ const STATUS_COLOR = {
 } as const // p/ dizer que sempre vai ser esses 3 e nunca vai mudar(se não colocar é como se fosse qualquer txt)
 
 interface StatusProps {
-  statusColor: keyof typeof STATUS_COLOR // as cores que eu tenho disponivel são o tipo do meu status color(typescript n consegue ler obj javasc. por isso passo a tipagem)
+  statusColor: keyof typeof STATUS_COLOR // as cores que eu tenho disponivel são as chaves do tipo do meu status color(typescript n consegue ler obj javasc. por isso passo a tipagem)
 }
 
 // novo componente(criado pelo styled components por que só é diferente na visualização) ou seja não precisa criar um novo arquivo
