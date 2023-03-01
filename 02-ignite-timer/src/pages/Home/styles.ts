@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { BaseCountDownButton } from './Countdown/styles'
 
 // home sem o layout
 export const HomeContainer = styled.main`
@@ -17,8 +18,6 @@ export const HomeContainer = styled.main`
     gap: 3.5rem;
   }
 `
-
-
 
 export const StartCountDownButton = styled(BaseCountDownButton)`
   background: ${(props) => props.theme['green-500']}; //scp
