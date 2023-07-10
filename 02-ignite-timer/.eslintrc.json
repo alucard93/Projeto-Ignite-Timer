@@ -1,3 +1,17 @@
 {
-    "extends": "@rocketseat/eslint-config/react"
+  "extends": ["@rocketseat/eslint-config/react", "prettier"],
+  "plugins": ["prettier", "react", "react-hooks"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "es5",
+        "singleQuote": true,
+        "printWidth": 100,
+        "tabWidth": 4,
+        "semi": true,
+        "endOfLine": "auto"
+      }
+    ]
+  }
 }
