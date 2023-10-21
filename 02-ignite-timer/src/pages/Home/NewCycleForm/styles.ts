@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 // container (label and input)
 export const FormContainer = styled.div`
@@ -11,7 +11,7 @@ export const FormContainer = styled.div`
     font-size: 1.125rem;
     font-weight: bold;
     flex-wrap: wrap; // quando atingir o tamanho ele quebra a linha
-`;
+`
 // o input possui propriedades igual com isso criou-se um elemento para passar em ambos e evitar repetição
 const BaseInput = styled.input`
     background: transparent;
@@ -31,7 +31,7 @@ const BaseInput = styled.input`
     &::placeholder {
         color: ${(props) => props.theme['gray-500']};
     }
-`;
+`
 
 export const TaskInput = styled(BaseInput)`
     flex: 1; // um atalho para setar 3 propriedades(flex-grow[eu dou habilidade para o meu componente crescer além?], flex-basic[qual o tamanho ideal?],shrink[eu dou habilidade para o meu componente diminuir além?] )
@@ -40,7 +40,7 @@ export const TaskInput = styled(BaseInput)`
         // tirar a seta do input no chorme
         display: none !important;
     }
-`;
+`
 export const MinutesAmountInput = styled(BaseInput)`
     width: 4rem;
-`;
+`

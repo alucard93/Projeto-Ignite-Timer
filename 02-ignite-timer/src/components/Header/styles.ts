@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
     display: flex; //padrão row
@@ -31,4 +31,4 @@ export const HeaderContainer = styled.header`
             color: ${(props) => props.theme['green-500']};
         }
     }
-`;
+`
