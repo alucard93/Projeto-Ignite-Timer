@@ -31,7 +31,7 @@ export const NewCycleForm = () => {
                 type="number"
                 id="minutesAmount"
                 placeholder="00"
-                step={5} // pula de 5 em 5
+                step={1} // pula de 1 em 1
                 min={1} // valor minimo
                 max={60} // valor maximo
                 disabled={!!activeCycle}
