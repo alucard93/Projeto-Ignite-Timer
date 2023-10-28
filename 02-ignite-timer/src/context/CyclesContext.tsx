@@ -1,100 +1,86 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useState, useReducer } from 'react'
+import { Cycle, cyclesReducer } from '../reducer/cycles/reducers'
+import {
+  addNewCycleAction,
+  interruptCurrentCycleAsFinishedAction,
+  markCurrentCycleAsFinishedAction,
+} from '../reducer/cycles/actions'
 
 interface CreateCycleData {
-    task: string;
-    minutesAmount: number;
-}
-
-// tudo que tem dentro do ciclo
-interface Cycle {
-    id: string;
-    task: string;
-    minutesAmount: number;
-    startDate: Date;
-    interruptedDate?: Date;
-    finishedDate?: Date;
+  task: string
+  minutesAmount: number
 }
 
 interface CyclesContextType {
-    cycles: Cycle[]; // inves de passar um a um passo a interface
-    activeCycle: Cycle | undefined;
-    activeCycleId: string | null;
-    amountSecondsPassed: number;
-    markCurrentCycleAsFineshed: () => void;
-    setSecondsPassed: (seconds: number) => void;
-    createNewCycle: (data: CreateCycleData) => void;
-    interruptCurrentCycle: () => void;
+  cycles: Cycle[] // inves de passar um a um passo a interface
+  activeCycle: Cycle | undefined
+  activeCycleId: string | null
+  amountSecondsPassed: number
+  markCurrentCycleAsFineshed: () => void
+  setSecondsPassed: (seconds: number) => void
+  createNewCycle: (data: CreateCycleData) => void
+  interruptCurrentCycle: () => void
 }
 
-export const CyclesContext = createContext({} as CyclesContextType);
-
+export const CyclesContext = createContext({} as CyclesContextType)
 interface CyclesContextProviderProps {
-    children: ReactNode;
+  children: ReactNode
 }
 
-export function CyclesContextProvider({ children }: CyclesContextProviderProps) {
-    const [cycles, setCycles] = useState<Cycle[]>([]);
-    const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
-    const [amountSecondsPassed, setAmountSecondsPassed] = useState(0);
+export function CyclesContextProvider({
+  children,
+}: CyclesContextProviderProps) {
+  const [cyclesState, dispatch] = useReducer(cyclesReducer, {
+    cycles: [],
+    activeCycleId: null,
+  })
 
-    const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId); // para n precisar ver qual está ativo e desativar o antigo // criou-se um novo estado e pegou qual estava antigo e comparou
+  const [amountSecondsPassed, setAmountSecondsPassed] = useState(0)
 
-    function setSecondsPassed(seconds: number) {
-        setAmountSecondsPassed(seconds);
+  const { cycles, activeCycleId } = cyclesState
+
+  function setSecondsPassed(seconds: number) {
+    setAmountSecondsPassed(seconds)
+  }
+
+  function createNewCycle(data: CreateCycleData) {
+    const id = String(new Date().getTime())
+    const newCycle: Cycle = {
+      id,
+      task: data.task,
+      minutesAmount: data.minutesAmount,
+      startDate: new Date(),
     }
 
-    function markCurrentCycleAsFineshed() {
-        setCycles((state) =>
-            state.map((cycle) => {
-                if (cycle.id === activeCycleId) {
-                    return { ...cycle, finishedDate: new Date() };
-                } else {
-                    return cycle;
-                }
-            })
-        );
-    }
+    dispatch(addNewCycleAction(newCycle))
 
-    function createNewCycle(data: CreateCycleData) {
-        const newCycle: Cycle = {
-            id: String(new Date().getTime()),
-            task: data.task,
-            minutesAmount: data.minutesAmount,
-            startDate: new Date(),
-        };
+    setAmountSecondsPassed(0) // limpando o tempo e começando de zero
+  }
 
-        setCycles((state) => [...cycles, newCycle]); // sempre que uma alteração de estado depender do estado antigo a gente usa o formato de arrow function
-        setActiveCycleId(newCycle.id);
-        setAmountSecondsPassed(0); // limpando o tempo e começando de zero
-    }
+  const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
 
-    function interruptCurrentCycle() {
-        setCycles((state) =>
-            state.map((cycle) => {
-                if (cycle.id === activeCycleId) {
-                    return { ...cycle, interruptedDate: new Date() };
-                } else {
-                    return cycle;
-                }
-            })
-        );
-        setActiveCycleId(null);
-    }
+  function markCurrentCycleAsFineshed() {
+    dispatch(markCurrentCycleAsFinishedAction())
+  }
 
-    return (
-        <CyclesContext.Provider
-            value={{
-                cycles,
-                activeCycle,
-                activeCycleId,
-                markCurrentCycleAsFineshed,
-                amountSecondsPassed,
-                setSecondsPassed,
-                createNewCycle,
-                interruptCurrentCycle,
-            }}
-        >
-            {children}
-        </CyclesContext.Provider>
-    );
+  function interruptCurrentCycle() {
+    dispatch(interruptCurrentCycleAsFinishedAction())
+  }
+
+  return (
+    <CyclesContext.Provider
+      value={{
+        cycles,
+        activeCycle,
+        activeCycleId,
+        markCurrentCycleAsFineshed,
+        amountSecondsPassed,
+        setSecondsPassed,
+        createNewCycle,
+        interruptCurrentCycle,
+      }}
+    >
+      {children}
+    </CyclesContext.Provider>
+  )
 }

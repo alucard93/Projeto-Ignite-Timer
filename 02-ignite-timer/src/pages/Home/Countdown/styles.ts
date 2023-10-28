@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 // container (span **hora)
 export const CountdownContainer = styled.div`
@@ -15,7 +15,7 @@ export const CountdownContainer = styled.div`
         padding: 2rem 1rem; //2 encima e embaixo e 1 laterais
         border-radius: 8px;
     }
-`;
+`
 
 // (dois pontos)
 export const Separator = styled.div`
@@ -27,7 +27,7 @@ export const Separator = styled.div`
 
     display: flex;
     justify-content: center;
-`;
+`
 export const BaseCountDownButton = styled.button`
     width: 100%;
     border: 0;
@@ -46,4 +46,4 @@ export const BaseCountDownButton = styled.button`
         opacity: 0.7;
         cursor: not-allowed;
     }
-`;
+`

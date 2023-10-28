@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { BaseCountDownButton } from './Countdown/styles';
+import styled from 'styled-components'
+import { BaseCountDownButton } from './Countdown/styles'
 
 // home sem o layout
 export const HomeContainer = styled.main`
@@ -17,7 +17,7 @@ export const HomeContainer = styled.main`
 
         gap: 3.5rem;
     }
-`;
+`
 
 export const StartCountDownButton = styled(BaseCountDownButton)`
     background: ${(props) => props.theme['green-500']}; //scp
@@ -27,7 +27,7 @@ export const StartCountDownButton = styled(BaseCountDownButton)`
     &:not(:disabled):hover {
         background: ${(props) => props.theme['green-700']}; //scp
     }
-`;
+`
 
 export const StopCountDownButton = styled(BaseCountDownButton)`
     background: ${(props) => props.theme['red-500']}; //scp
@@ -37,4 +37,4 @@ export const StopCountDownButton = styled(BaseCountDownButton)`
     &:not(:disabled):hover {
         background: ${(props) => props.theme['red-700']}; //scp
     }
-`;
+`
